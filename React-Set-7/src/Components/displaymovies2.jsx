@@ -35,8 +35,16 @@ export function DisplayMovies2() {
     }
   };
 
+  // Add Sort Method
+  const sortByPrice = () => {
+    const sorted = [...filteredMovies].sort((a, b) => a.year - b.year);
+    setFilteredMovies(sorted);
+  };
+
+  // Add Unique Genre
   const uniqueGenre = [...new Set(movies.map(({ genre }) => genre))];
   console.log(uniqueGenre);
+
   return (
     <div>
       <select name="movieList" id="movieList" onChange={filterMovie}>
@@ -48,6 +56,7 @@ export function DisplayMovies2() {
           </option>
         ))}
       </select>
+      {!isLoading && <button onClick={sortByPrice}>Sort --Low to High</button>}
       {isLoading && <h1>Loading...</h1>}
       <div>
         {filteredMovies.map(({ title, year, genre }) => (
