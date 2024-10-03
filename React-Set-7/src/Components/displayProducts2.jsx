@@ -24,10 +24,28 @@ export function DisplayProduct2() {
     handleProduct();
   }, []);
 
+  const handleFilter = (e) => {
+    if (e.target.value.length === 0) {
+      setFilteredProduct(product);
+    } else {
+      const newProduct = product.filter(
+        ({ name }) => e.target.value.toLowerCase() === name.toLowerCase()
+      );
+      setFilteredProduct(newProduct);
+    }
+  };
+
   return (
     <div>
       {isLoading && <p>Loading...</p>}
-      {product.map(({ name, price, quantity, rating }) => (
+      <label htmlFor="search">Search : </label>
+      <input
+        onChange={handleFilter}
+        type="search"
+        name="search"
+        placeholder="Search here...."
+      ></input>
+      {filteredProduct.map(({ name, price, quantity, rating }) => (
         <div
           key={name}
           style={{
