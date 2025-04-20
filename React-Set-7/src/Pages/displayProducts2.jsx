@@ -29,29 +29,28 @@ export function DisplayProduct2() {
     if (e.target.value.length === 0) {
       setFilteredProduct(product);
     } else {
-      const newProduct = product.filter(
-        ({ name }) => e.target.value.toLowerCase() === name.toLowerCase()
+      const newProduct = product.filter(({ name }) =>
+        name.toLowerCase().includes(e.target.value.toLowerCase())
       );
       setFilteredProduct(newProduct);
     }
   };
-  if(isLoading){
-    return <Loader/>
+  if (isLoading) {
+    return <Loader />;
   }
 
   return (
     <div className="font-fira-code flex flex-col  border-4 border-x-yellow-200 m-10 min-w-[30vw] justify-center items-center">
-     <div className="flex m-3 font-semibold text-xl">
-
-      <label htmlFor="search">Search : </label>
-      <input
-        onChange={handleFilter}
-        className="bg-none rounded-2xl px-4 mx-2 border-none"
-        type="search"
-        name="search"
-        placeholder="Search here...."
+      <div className="flex m-3 font-semibold text-xl">
+        <label htmlFor="search">Search : </label>
+        <input
+          onChange={handleFilter}
+          className="bg-none rounded-2xl px-4 mx-2 border-none"
+          type="search"
+          name="search"
+          placeholder="Search here...."
         ></input>
-        </div>
+      </div>
       {filteredProduct.map(({ name, price, quantity, rating }) => (
         <div
           key={name}
