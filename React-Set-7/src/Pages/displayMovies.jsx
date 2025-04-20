@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fakeFetch } from "../Api/moviesApi";
+import Loader from "../components/Loader";
 
 export function DisplayMovies(){
     const [movies,setMovies] = useState([]);
@@ -33,11 +34,14 @@ export function DisplayMovies(){
             }
         
     }
+    if(isLoading){
+        return <Loader/>
+    }
 
     return(
-        <div>
-            {isLoading && <p>Loading.....</p> }
-            <select onChange={(e)=>handleFilteredMovies(e)}>
+        <div  className="font-fira-code flex flex-col  border-4 border-x-yellow-200 m-10 min-w-[30vw] justify-start items-center">
+           
+            <select onChange={(e)=>handleFilteredMovies(e)} className="bg-yellow-200 text-red-500 text-lg rounded-2xl p-1 m-2">
                 <option value = 'all'>All Year</option>
                 <option value = '2006'>2006</option>
                 <option value = '2007'>2007</option>
@@ -47,7 +51,7 @@ export function DisplayMovies(){
             </select>
         {
         filteredMovies.map(({title,year,rating},index)=>
-        <li key={index}>
+        <li className="list-none border-4 border-x-yellow-200 w-[15vw] m-2 p-1" key={index}>
             <p>Name : {title}</p>
             <p>Year : {year}</p>
             <p>Rating : {rating}</p>
