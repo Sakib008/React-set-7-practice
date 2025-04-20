@@ -20,6 +20,6 @@ export const fakeFetch =(url)=>{
                     message : 'Movies list not found'
                 })
             }
-        })
+        },2000)
     })
 }
