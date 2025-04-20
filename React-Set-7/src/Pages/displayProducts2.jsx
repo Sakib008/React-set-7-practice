@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { fakeFetch } from "../Api/product2Api";
+import Loader from "../components/Loader";
 
 export function DisplayProduct2() {
   const [product, setProduct] = useState([]);
@@ -34,27 +35,29 @@ export function DisplayProduct2() {
       setFilteredProduct(newProduct);
     }
   };
+  if(isLoading){
+    return <Loader/>
+  }
 
   return (
-    <div>
-      {isLoading && <p>Loading...</p>}
+    <div className="font-fira-code flex flex-col  border-4 border-x-yellow-200 m-10 min-w-[30vw] justify-center items-center">
+     <div className="flex m-3 font-semibold text-xl">
+
       <label htmlFor="search">Search : </label>
       <input
         onChange={handleFilter}
+        className="bg-none rounded-2xl px-4 mx-2 border-none"
         type="search"
         name="search"
         placeholder="Search here...."
-      ></input>
+        ></input>
+        </div>
       {filteredProduct.map(({ name, price, quantity, rating }) => (
         <div
           key={name}
-          style={{
-            border: "2px solid black",
-            borderRadius: " 5px",
-            margin: "5px 2px",
-          }}
+          className="w-[20vw] border-2 border-red-200 p-2 m-2 rounded-2xl font-semibold"
         >
-          <h2>{name}</h2>
+          <h2 className="text-lg">{name}</h2>
           <p>Price : {price}</p>
           <p>Quantity : {quantity}</p>
           <p>Rating : {rating}</p>
